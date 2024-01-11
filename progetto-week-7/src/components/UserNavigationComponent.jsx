@@ -44,7 +44,7 @@ export default class UserNavigationComponent extends Component {
         <div className="user-avatar">
           <div className="dropdown">
             <button
-              className="btn btn-secondary dropdown-toggle p-0 rounded-0 border-0"
+              className="btn btn-dark bg-transparent dropdown-toggle p-0 rounded-0 border-0"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
