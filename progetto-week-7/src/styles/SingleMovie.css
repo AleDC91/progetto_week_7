@@ -1,0 +1,19 @@
+.single-movie {
+  /* border: 1px solid red; */
+  min-width: 150px;
+  transform: scale(1);
+  cursor: pointer;
+  margin: 0 0.4rem;
+
+}
+
+.single-movie img {
+  width: 100%;
+}
+
+.single-movie.active {
+  transform: scale(1.4);
+  transition: all 0.2s linear;
+  z-index: 100;
+  position: relative
+}

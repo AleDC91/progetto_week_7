@@ -1,0 +1,14 @@
+.info-film {
+    background-color: #141414;
+}
+.compatibility{
+    font-size: 8px;
+    color: rgb(0, 203, 0);
+}
+
+.info-age{
+    font-size: 8px;
+
+    border: 1px solid grey;
+    color: grey;
+}
