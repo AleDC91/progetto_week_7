@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GalleryComponent from "./GalleryComponent";
 import { OMDb_API_KEY, URL } from "../config/config";
 import "../styles/CentralComponent.css";
-import LoadingPlaceholderComponent from "./LoadingPlaceholderComponent";
+
 
 export default class CentralComponent extends Component {
   state = {
@@ -26,21 +26,29 @@ export default class CentralComponent extends Component {
   };
 
   getHarryPotter = () => {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, errorMsg: "" });
     fetch(`${URL}?apikey=${OMDb_API_KEY}&s=harry%20potter`)
       .then((res) => {
-        console.log(res);
-        return res.json();
+        if (!res.ok) {
+          this.setState({ errorMsg: "errore nel fetch" });
+        } else {
+          console.log(res);
+          return res.json();
+        }
       })
-      .then((json) =>
-        this.setState(
-          (prevState) => ({
-            ...prevState,
-            films: { ...prevState.films, harryPotter: json.Search },
-          }),
-          () => console.log(this.state)
-        )
-      )
+      .then((json) => {
+        if (json && json.Search) {
+          this.setState(
+            (prevState) => ({
+              ...prevState,
+              films: { ...prevState.films, harryPotter: json.Search },
+            }),
+            () => console.log(this.state)
+          );
+        } else {
+          throw new Error("errore nel fetch");
+        }
+      })
       .catch((err) => this.setState({ errorMsg: err.message }))
       .finally(() => {
         this.setState({ isLoading: false });
@@ -48,21 +56,29 @@ export default class CentralComponent extends Component {
   };
 
   getLordOfTheRings = () => {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, errorMsg: "" });
     fetch(`${URL}?apikey=${OMDb_API_KEY}&s=lord%20of%20the%20rings`)
       .then((res) => {
-        console.log(res);
-        return res.json();
+        if (!res.ok) {
+          this.setState({ errorMsg: "errore nel fetch" });
+        } else {
+          console.log(res);
+          return res.json();
+        }
       })
-      .then((json) =>
-        this.setState(
-          (prevState) => ({
-            ...prevState,
-            films: { ...prevState.films, lordOfTheRings: json.Search },
-          }),
-          () => console.log(this.state)
-        )
-      )
+      .then((json) => {
+        if (json && json.Search) {
+          this.setState(
+            (prevState) => ({
+              ...prevState,
+              films: { ...prevState.films, lordOfTheRings: json.Search },
+            }),
+            () => console.log(this.state)
+          );
+        } else {
+          throw new Error("errore nel fetch");
+        }
+      })
       .catch((err) => this.setState({ errorMsg: err.message }))
       .finally(() => {
         this.setState({ isLoading: false });
@@ -70,21 +86,29 @@ export default class CentralComponent extends Component {
   };
 
   jasonBourne = () => {
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, errorMsg: "" });
     fetch(`${URL}?apikey=${OMDb_API_KEY}&s=jason%20bourne`)
       .then((res) => {
-        console.log(res);
-        return res.json();
+        if (!res.ok) {
+          this.setState({ errorMsg: "errore nel fetch" });
+        } else {
+          console.log(res);
+          return res.json();
+        }
       })
-      .then((json) =>
-        this.setState(
-          (prevState) => ({
-            ...prevState,
-            films: { ...prevState.films, jasonBourne: json.Search },
-          }),
-          () => console.log(this.state)
-        )
-      )
+      .then((json) => {
+        if (json && json.Search) {
+          this.setState(
+            (prevState) => ({
+              ...prevState,
+              films: { ...prevState.films, jasonBourne: json.Search },
+            }),
+            () => console.log(this.state)
+          );
+        } else {
+          throw new Error("errore nel fetch");
+        }
+      })
       .catch((err) => this.setState({ errorMsg: err.message }))
       .finally(() => {
         this.setState({ isLoading: false });
@@ -104,16 +128,19 @@ export default class CentralComponent extends Component {
           title="Harry Potter"
           movies={this.state.films.harryPotter}
           isLoading={this.state.isLoading}
+          errorMsg={this.state.errorMsg}
         />
         <GalleryComponent
           title="Il Signore degli Anelli"
           movies={this.state.films.lordOfTheRings}
           isLoading={this.state.isLoading}
+          errorMsg={this.state.errorMsg}
         />
         <GalleryComponent
           title="JSON Bourne"
           movies={this.state.films.jasonBourne}
           isLoading={this.state.isLoading}
+          errorMsg={this.state.errorMsg}
         />
       </div>
     );

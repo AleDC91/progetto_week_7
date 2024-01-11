@@ -1,5 +1,5 @@
 .movies{
-    min-height: 400px;
+    /* min-height: 600px; */
     position: relative;
     display: flex;
     align-items: center;

@@ -1,31 +1,24 @@
 import React, { Component } from "react";
 import "../styles/SingleMovie.css";
 import InfoFilmComponent from "./InfoFilmComponent";
-import LoadingPlaceholderComponent from "./LoadingPlaceholderComponent";
+
 
 export default class SingleMovie extends Component {
   state = {
     isActive: false,
     timeoutId: null,
-    windowSize: window.innerWidth,
-    movieWidth: 0,
-    movieHeight: 0
+
   };
 
   componentDidMount() {
-    window.addEventListener("resize", this.handleResize);
-    this.calculateMovieSize();
+    window.addEventListener("resize", this.props.handleResize);
+    this.props.calculateMovieSize();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("resize", this.props.handleResize);
   }
 
-  handleResize = () => {
-    this.setState({ windowSize: window.innerWidth });
-    this.calculateMovieSize();
-    console.log(this.state.windowSize);
-  };
 
   activateZoom = () => {
     const timeoutId = setTimeout(() => {
@@ -49,27 +42,7 @@ export default class SingleMovie extends Component {
     }
   };
 
-  calculateMovieSize = () => {
-    const { innerWidth: inner } = window;
-    let width, height;
-
-    if (inner > 992) {
-      width = inner / 6;
-    } else if (inner > 768) {
-      width = inner / 4;
-    } else if (inner > 576) {
-      width = inner / 3;
-    } else {
-      width = inner;
-    }
-
-    height = width / 3;
-
-    this.setState({
-      movieWidth: width,
-      movieHeight: height
-    });
-  };
+ 
 
 
 
@@ -78,19 +51,20 @@ export default class SingleMovie extends Component {
 
   render() {
     return (
-        
+        <>
         <div
+        style={{ minWidth: `${this.props.movieWidth}px`, minHeight: `${this.props.movieWidth *1.2}px`, backgroundColor: "transparent" }}
         className={`single-movie ${this.state.isActive ? "active" : ""}`}
-        onResize={() => this.handleResize()}
+       
         onMouseEnter={this.activateZoom}
         onMouseLeave={this.removeZoom}
-        style={{ width: `${this.state.movieWidth}px` }}
+        
         >
         
-        <img src={this.props.movie.Poster !== "N/A" ? this.props.movie.Poster : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png" } alt={this.props.movie.Title} />
+        <img className="img-fluid" src={this.props.movie.Poster !== "N/A" ? this.props.movie.Poster : "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/640px-No-Image-Placeholder.svg.png" } alt={this.props.movie.Title}  />
         {this.state.isActive && <InfoFilmComponent movie={this.props.movie} />}
       </div>
-          
+      </>
     );
   }
 }

@@ -4,7 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import "../styles/NavbarComponent.css";
 import LogoComponent from "./LogoComponent";
-
+import { Link } from "react-router-dom";
+import UserNavigationComponent from "./UserNavigationComponent";
 
 export default class NavbarComponent extends Component {
   render() {
@@ -12,13 +13,20 @@ export default class NavbarComponent extends Component {
       <Navbar expand="lg" className=" navbar-netflix texr-white" variant="dark">
         <Container fluid>
           <Navbar.Brand href="#home">
-            <LogoComponent />
+            <Link to="/">
+              <LogoComponent />
+            </Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav"  className="toggle-menu-btn " />
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            className="toggle-menu-btn "
+          />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto ">
-              <Nav.Link href="#home" className="text-white">
-                Home
+              <Nav.Link>
+                <Link to="/" className="text-white text-decoration-none">
+                  Home
+                </Link>
               </Nav.Link>
               <Nav.Link href="#link" className="text-white">
                 Tv Shows
@@ -35,6 +43,7 @@ export default class NavbarComponent extends Component {
             </Nav>
           </Navbar.Collapse>
           {/* <p className="text-white">ciao</p> */}
+          <UserNavigationComponent/>
         </Container>
       </Navbar>
     );
