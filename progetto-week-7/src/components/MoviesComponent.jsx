@@ -59,6 +59,24 @@ export default class MoviesComponent extends Component {
   };
 
 
+  handleScrollClick = (e, direction) => {
+    console.log("handleScrollClick called with direction:", direction);
+    const scrollIncrement = this.state.windowSize;
+    const container = e.target.parentNode.parentNode; 
+  
+    if (container) {
+      container.scrollLeft =
+        direction === "right"
+          ? container.scrollLeft + scrollIncrement
+          : container.scrollLeft - scrollIncrement;
+    }
+  
+    this.setState({
+      scrollX: container ? container.scrollLeft : this.state.scrollX,
+    }, () => console.log(this.state));
+  };
+
+
   render() {
     return (
       <div
@@ -74,8 +92,8 @@ export default class MoviesComponent extends Component {
             left: `${this.state.scrollX}px`,
           }}
         >
-          <SlideButton direction="left" />
-          <SlideButton direction="right" />
+          <SlideButton direction="left" handleScrollClick={this.handleScrollClick}/>
+          <SlideButton direction="right" handleScrollClick={this.handleScrollClick}/>
         </div>
         {!this.props.isLoading &&
           this.props.movies.length === 0 &&
