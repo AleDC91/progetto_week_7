@@ -6,7 +6,7 @@
 .slide-button.right {
   position: absolute;
   height: 100%;
-  right: 0;
+  right: 50px;
 
 }
 
@@ -16,7 +16,7 @@
   border: none;
   font-size: 2rem;
   color: transparent;
-  z-index: 2;
+  z-index: 5;
 }
 .slide-button.left:hover,
 .slide-button.right:hover{

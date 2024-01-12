@@ -1,13 +1,15 @@
 .movies{
     /* min-height: 600px; */
-    position: relative;
     display: flex;
     align-items: center;
     white-space: nowrap; /* Impedisce la divisione su più righe */
     overflow-x: auto; 
     overflow-y: visible;
-   
+    position: relative;
+
 }
 
-
+.btns-container{
+    position: absolute;
+}
   
