@@ -1,5 +1,5 @@
 .right-nav-btns{
-    position: fixed;
+    position: absolute;
     right: 0;
     top: 1rem;
     margin-right: 2rem ;
